@@ -11,9 +11,8 @@
 
 //mi cambio de Paolo
 
-import mongoose, { Schema, model } from require("mongoose")
-const pagoSchema = Schema(
-    {
+const mongoose = require("mongoose")
+const pagoSchema = mongoose.Schema({
         Titulo:{
             type: String,
             required: true,
@@ -46,10 +45,8 @@ const pagoSchema = Schema(
             type: String,
             required: true,
         },
-        
-    }
-)
-const PagoModel = model(
+});
+const PagoModel = mongoose.model(
    'pago', pagoSchema
 )
 module.exports = PagoModel

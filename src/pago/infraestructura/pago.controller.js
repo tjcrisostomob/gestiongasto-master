@@ -1,6 +1,5 @@
 const { pagoCreate, pagoSearch, pagoEliminate, pagoUpdate } = require('../aplicacion');
 async function post(request, response) {  
-
     try{  
         const jwt = "inicial";  
         const {
@@ -85,16 +84,16 @@ async function deleted(request, response){
         const {
             _id,
         } = request.body;
-        const usuarioTmp = {
+        const pagoTmp = {
             _id,
         };
-        const PagoNew = await pagoEliminate(usuarioTmp); 
+        const PagoNew = await pagoEliminate(pagoTmp); 
         response.status(201).json(PagoNew); 
-    }   catch (error) { 
+    } catch (error) { 
         console.log(error) 
         response.status(400).send(error); 
     } 
 } 
 
-const UsuarioController = { post, get, put, deleted }; 
-module.exports = UsuarioController; 
+const PagoController = { post, get, put, deleted }; 
+module.exports = PagoController; 

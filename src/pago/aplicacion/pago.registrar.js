@@ -1,5 +1,5 @@
-const PagoRegistrar = () => async (pago) => { 
-    const PagoNew = pago; 
+const PagoRegistrar = (PagoMongo) => async (pago) => { 
+    const PagoNew = PagoMongo.create(pago); 
     return PagoNew; 
 } 
-module.exports = PagoRegistrar 
+module.exports = PagoRegistrar

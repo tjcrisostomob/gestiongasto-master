@@ -9,6 +9,8 @@
 //     Usuario: ''
 // } 
 
+//mi cambio de Paolo
+
 import mongoose, { Schema, model } from require("mongoose")
 const pagoSchema = Schema(
     {

@@ -4,6 +4,7 @@ async function post(request, response) {
         const jwt = "inicial";
         const {
             Dni,
+            CodigoUniversitario,
             Nombres,
             ApellidoPaterno,
             ApellidoMaterno,
@@ -15,6 +16,7 @@ async function post(request, response) {
         } = request.body;
         const usuarioTmp = {
             Dni,
+            CodigoUniversitario,
             Nombres,
             ApellidoPaterno,
             ApellidoMaterno,
@@ -55,6 +57,7 @@ async function put(request, response) {
         const {
             _id,
             Dni,
+            CodigoUniversitario,
             Nombres,
             ApellidoPaterno,
             ApellidoMaterno,
@@ -67,6 +70,7 @@ async function put(request, response) {
         const usuarioTmp = {
             _id,
             Dni,
+            CodigoUniversitario,
             Nombres,
             ApellidoPaterno,
             ApellidoMaterno,
@@ -88,10 +92,10 @@ async function put(request, response) {
 async function deleted(request, response) {
     try {
         const {
-            _id,
+            Dni,
         } = request.body;
         const usuarioTmp = {
-            _id,
+            Dni,
         };
         const UsuarioNew = await usuarioEliminate(usuarioTmp);
         response.status(201).json(UsuarioNew);

@@ -13,6 +13,11 @@
 
 const mongoose = require("mongoose")
 const usuarioSchema = mongoose.Schema({
+    CodigoUniversitario: {
+        type: String,
+        required: true,
+        unique: true
+    },
     Dni: {
         type: String,
         required: true,

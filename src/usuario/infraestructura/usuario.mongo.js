@@ -27,6 +27,9 @@ async function search(params) {
 }
 async function eliminate(usuario) {
     try {
+        //buscar al usuario por su dni
+        // { Dni: usuario.Dni }
+
         await UsuarioModel.deleteOne({ _id: usuario._id });
         return Promise.resolve(true);
 

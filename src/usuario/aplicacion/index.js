@@ -1,0 +1,9 @@
+const UsuarioRegistrar = require('./usuario.registrar');
+const UsuarioBuscar = require('./usuario.buscar');
+const UsuarioEliminar = require('./usuario.eliminar');
+const UsuarioActualizar = require('./usuario.actualizar');
+const usuarioCreate = UsuarioRegistrar();
+const usuarioSearch = UsuarioBuscar();
+const usuarioEliminate = UsuarioEliminar();
+const usuarioUpdate = UsuarioActualizar();
+module.exports = { usuarioCreate, usuarioSearch, usuarioEliminate, usuarioUpdate }

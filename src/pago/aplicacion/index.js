@@ -1,0 +1,9 @@
+const PagoRegistrar = require('./pago.registrar'); 
+const PagoBuscar = require('./pago.buscar'); 
+const PagoEliminar = require('./pago.eliminar'); 
+const PagoActualizar = require('./pago.actualizar');
+const pagoCreate = PagoRegistrar(); 
+const pagoSearch = PagoBuscar(); 
+const pagoEliminate = PagoEliminar(); 
+const pagoUpdate = PagoActualizar();
+module.exports = { pagoCreate, pagoSearch, pagoEliminate, pagoUpdate } 

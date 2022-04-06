@@ -12,8 +12,9 @@
 
 require('dotenv').config();
 
-const usuarioRouter = require('./usuario/infraestructura/usuario.router')
+const mongodb = require('./mongo.db');
 
+const usuarioRouter = require('./usuario/infraestructura/usuario.router')
 const pagoRouter = require('./pago/infraestructura/pago.router')
 
 const port = process.env.node_port || 3000;
@@ -38,7 +39,7 @@ app.use('/api/v1', usuarioRouter)
 app.use('/api/v1', pagoRouter)
 server.listen(port, () => {
 
-    // mongodb().then(()=>console.log("ok")).catch((err) => console.log(err));
+    mongodb().then(() => console.log("ok")).catch((err) => console.log(err));
 
     console.log(`Server running on port ${port}`);
 

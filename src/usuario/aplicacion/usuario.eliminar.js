@@ -1,5 +1,5 @@
-const UsuarioEliminar = () => async (usuario) => {
-    const UsuarioNew = usuario;
-    return false;
+const UsuarioEliminar = (UsuarioMongo) => async(usuario) => {
+    const isEliminated = UsuarioMongo.eliminate(usuario);
+    return isEliminated;
 }
 module.exports = UsuarioEliminar

@@ -1,5 +1,5 @@
-const PagoBuscar = () => async (Pago) => { 
-    const PagoNew = Pago; 
-    return [PagoNew]; 
+const PagoBuscar = () => async (params) => { 
+    const PagoNew = params; 
+    return [PagoNew, PagoNew]; 
 } 
 module.exports = PagoBuscar 

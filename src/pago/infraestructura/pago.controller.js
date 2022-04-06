@@ -1,12 +1,28 @@
-const { pagoCreate, pagoSearch, pagoDelete, pagoUpdate } = require('../aplicacion');
+const { pagoCreate, pagoSearch, pagoEliminate, pagoUpdate } = require('../aplicacion');
 async function post(request, response) {  
 
     try{  
         const jwt = "inicial";  
-        const { Titulo, Descripcion, Monto, FechaProceso, FechaRegistro, FechaActualizacion, EstadoActivo, Usuario } = request.body;  
-        const pagoTmp = { Titulo, Descripcion, Monto,  
-            FechaProceso, FechaRegistro, FechaActualizacion,  
-            EstadoActivo, Usuario, jwt};  
+        const {
+            Titulo,
+            Descripcion, 
+            Monto, 
+            FechaProceso, 
+            FechaRegistro, 
+            FechaActualizacion, 
+            EstadoActivo, 
+            Usuario 
+        } = request.body;  
+        const pagoTmp = { 
+            Titulo, 
+            Descripcion, 
+            Monto,  
+            FechaProceso, 
+            FechaRegistro, 
+            FechaActualizacion,  
+            EstadoActivo, 
+            Usuario,
+        };  
         const PagoNew = await pagoCreate(pagoTmp);  
         response.status(201).json(PagoNew); 
     }   catch (error) {  
@@ -16,7 +32,13 @@ async function post(request, response) {
 } 
 
 async function get(request, response){  
-    try{  
+    try{
+        var _id = request.query._id;
+        console.log(request.query._id);
+        var filtros = {};
+        if (_id != undefined) {
+            filtros = { _id: _id };
+        }
         const PagoNew = await pagoSearch(pagoTmp);  
         response.status(201).json(PagoNew); 
     }   catch (error) {  
@@ -27,7 +49,29 @@ async function get(request, response){
 
 async function put(request, response){  
     try{  
-        const PagoNew = await pagoActualizar(pagoTmp);  
+        const jwt = "inicial";  
+        const {
+            Titulo,
+            Descripcion, 
+            Monto, 
+            FechaProceso, 
+            FechaRegistro, 
+            FechaActualizacion, 
+            EstadoActivo, 
+            Usuario 
+        } = request.body;  
+        const pagoTmp = { 
+            Titulo, 
+            Descripcion, 
+            Monto,  
+            FechaProceso, 
+            FechaRegistro, 
+            FechaActualizacion,  
+            EstadoActivo, 
+            Usuario,
+            jwt
+        };  
+        const PagoNew = await pagoUpdate(pagoTmp);  
         response.status(201).json(PagoNew);  
     }   catch (error) {  
         console.log(error)  
@@ -37,9 +81,15 @@ async function put(request, response){
 
 async function deleted(request, response){ 
 
-    try{ 
-        const UsuarioNew = await usuarioEliminated(usuarioTmp); 
-        response.status(201).json(UsuarioNew); 
+    try{
+        const {
+            _id,
+        } = request.body;
+        const usuarioTmp = {
+            _id,
+        };
+        const PagoNew = await pagoEliminate(usuarioTmp); 
+        response.status(201).json(PagoNew); 
     }   catch (error) { 
         console.log(error) 
         response.status(400).send(error); 

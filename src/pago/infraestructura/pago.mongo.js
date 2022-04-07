@@ -42,7 +42,7 @@ async function update(pago) {
     try {
         const filter = {_id};
         session.startTransaction();
-        const pagoUpdate = await PagoModel.findOneAndUpdate(filter, pago).session(session);
+        const pagoUpdate = await PagoModel.findOneAndUpdate(filter, _id, pago).session(session);
         if (!pagoUpdate) {
             throw new Error('Pago no encontrado');
         }

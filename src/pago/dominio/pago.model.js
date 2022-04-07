@@ -22,7 +22,7 @@ const pagoSchema = mongoose.Schema({
             required: true,
         },
         Monto:{
-            type: Schema.Types.Decimal128,
+            type: mongoose.Schema.Types.Decimal128,
             required: true,
         },
         FechaProceso:{

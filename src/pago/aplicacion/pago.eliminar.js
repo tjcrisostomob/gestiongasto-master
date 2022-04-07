@@ -1,5 +1,5 @@
-const PagoEliminar = () => async (Pago) => { 
-    const PagoNew = Pago; 
-    return true; 
-} 
-module.exports = PagoEliminar 
+const PagoEliminar = (PagoMongo) => async(Pago) => {
+    const PagoNew = PagoMongo.eliminate(Pago);;
+    return true;
+}
+module.exports = PagoEliminar

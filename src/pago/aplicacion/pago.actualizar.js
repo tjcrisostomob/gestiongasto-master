@@ -1,5 +1,5 @@
-const PagoActualizar = () => async (pago) => { 
-    const PagooNew = pago; 
-    return PagoNew; 
-} 
-module.exports = PagoActualizar 
+const PagoActualizar = (PagoMongo) => async(pago) => {
+    const PagoUpdate = PagoMongo.update(pago);
+    return PagoUpdate;
+}
+module.exports = PagoActualizar

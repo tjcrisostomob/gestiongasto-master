@@ -30,7 +30,7 @@ async function eliminate(usuario) {
         //buscar al usuario por su dni
         // { Dni: usuario.Dni }
 
-        await UsuarioModel.deleteOne({  Dni: usuario.Dni });
+        await UsuarioModel.deleteOne({ Dni: usuario.Dni });
         return Promise.resolve(true);
 
     } catch (error) {
@@ -40,7 +40,7 @@ async function eliminate(usuario) {
 async function update(usuario) {
     const session = await mongoose.startSession();
     try {
-        const filter = { Dni: usuario.Dni };
+        const filter = { _id: usuario._id };
         session.startTransaction();
         const usuarioUpdate = await UsuarioModel.findOneAndUpdate(filter, usuario).session(session);
         if (!usuarioUpdate) {

@@ -25,12 +25,12 @@ async function search(params) {
         return Promise.reject(error);
     }
 }
-async function eliminate() {
+async function eliminate(pago) {
     try {
         //buscar al usuario por su dni
         // { Dni: usuario.Dni }
 
-        await PagoModel.deleteOne({});
+        await PagoModel.deleteOne({ _id: pago._id });
         return Promise.resolve(true);
 
     } catch (error) {
@@ -40,9 +40,9 @@ async function eliminate() {
 async function update(pago) {
     const session = await mongoose.startSession();
     try {
-        const filter = {_id};
+        const filter = { "_id": pago._id };
         session.startTransaction();
-        const pagoUpdate = await PagoModel.findOneAndUpdate(filter, _id, pago).session(session);
+        const pagoUpdate = await PagoModel.findOneAndUpdate(filter, pago).session(session);
         if (!pagoUpdate) {
             throw new Error('Pago no encontrado');
         }

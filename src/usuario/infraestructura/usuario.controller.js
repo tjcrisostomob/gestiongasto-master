@@ -37,11 +37,10 @@ async function post(request, response) {
 
 async function get(request, response) {
     try {
-        var _id = request.query._id;
-        console.log(request.query._id);
+        var Dni = request.query.Dni;
         var filtros = {};
-        if (_id != undefined) {
-            filtros = { _id: _id };
+        if (Dni != undefined) {
+            filtros = { Dni: Dni };
         }
         const UsuarioNew = await usuarioSearch(filtros);
         response.status(201).json(UsuarioNew);

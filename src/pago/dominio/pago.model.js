@@ -42,7 +42,7 @@ const pagoSchema = mongoose.Schema({
             required: true,
         },
         Usuario:{
-            type: String,
+            type: mongoose.Schema.Types.ObjectId,
             required: true,
         },
 });

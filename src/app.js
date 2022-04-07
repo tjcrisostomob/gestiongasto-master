@@ -17,7 +17,7 @@ const mongodb = require('./mongo.db');
 const usuarioRouter = require('./usuario/infraestructura/usuario.router')
 const pagoRouter = require('./pago/infraestructura/pago.router')
 
-const port = process.env.node_port || 3000;
+const port = process.env.node_port || 6000;
 
 const express = require('express');
 

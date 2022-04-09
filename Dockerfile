@@ -1,8 +1,8 @@
+#Imagen base para el contenedor
 FROM node:12-alpine
 # Crear directorio de la aplicación
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 WORKDIR /home/node/app
-
 # Instalar dependencias 
 # Una invitacion es usada para asegurar que ambos package.json Y package-lock.json se copian 
 # donde esta disponible (npm@5+)

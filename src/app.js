@@ -37,6 +37,16 @@ app.use(cors())
 app.use(express.json())
 app.use('/api/v1', usuarioRouter)
 app.use('/api/v1', pagoRouter)
+
+function obtenerPuerto() {
+    return port;
+}
+
+function generarModelo(Dni, Nombres) {
+    return `(${Dni}) ${Nombres}`;
+
+}
+// module.exports = { obtenerPuerto, generarModelo };
 server.listen(port, () => {
 
     mongodb().then(() => console.log("ok")).catch((err) => console.log(err));

@@ -1,4 +1,4 @@
-const { usuarioCreate, usuarioSearch, usuarioEliminate, usuarioUpdate } = require('../aplicacion');
+const { usuarioCreate, usuarioSearch, usuarioEliminate, usuarioUpdate, usuarioLogon } = require('../aplicacion');
 async function post(request, response) {
     try {
         const jwt = "inicial";
@@ -12,7 +12,8 @@ async function post(request, response) {
             FechaRegistro,
             FechaActualizacion,
             EstadoActivo,
-            Ciclo
+            Ciclo,
+            Clave
         } = request.body;
         const usuarioTmp = {
             Dni,
@@ -25,7 +26,7 @@ async function post(request, response) {
             FechaActualizacion,
             EstadoActivo,
             Ciclo,
-            jwt
+            Clave
         };
         const UsuarioNew = await usuarioCreate(usuarioTmp);
         response.status(201).json(UsuarioNew);
@@ -103,6 +104,19 @@ async function deleted(request, response) {
         response.status(400).send(error);
     }
 }
+async function login(request, response) {
+    try {
+        const {
+            Dni,
+            Clave
+        } = request.body;
+        const UsuarioLogon = await usuarioLogon(Dni, Clave);
 
-const UsuarioController = { post, get, put, deleted };
+        response.status(201).json(UsuarioLogon);
+    } catch (error) {
+        response.status(400).send(error);
+    }
+}
+
+const UsuarioController = { post, get, put, deleted, login };
 module.exports = UsuarioController;

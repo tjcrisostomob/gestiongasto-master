@@ -1,8 +1,10 @@
 const express = require('express');
 const UsuarioController = require('./usuario.controller');
+const Auth = require("../../app/app.middleware");
 const UsuarioRouter = express.Router();
 UsuarioRouter.post('/usuario/post', UsuarioController.post);
-UsuarioRouter.get('/usuario/get', UsuarioController.get);
+UsuarioRouter.get('/usuario/get', Auth, UsuarioController.get);
 UsuarioRouter.put('/usuario/put', UsuarioController.put);
 UsuarioRouter.delete('/usuario/delete', UsuarioController.deleted);
+UsuarioRouter.post('/usuario/login', UsuarioController.login);
 module.exports = UsuarioRouter;

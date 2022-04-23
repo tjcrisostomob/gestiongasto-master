@@ -12,6 +12,8 @@
 // mi cambio
 
 const mongoose = require("mongoose")
+const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 const usuarioSchema = mongoose.Schema({
     CodigoUniversitario: {
         type: String,
@@ -55,6 +57,33 @@ const usuarioSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    jwt: {
+        type: String,
+        required: false
+    },
+    Clave: {
+        type: String,
+        required: true
+    }
+});
+usuarioSchema.method("generarAuthToken", async function() {
+    const user = this;
+    const jwtNew = jwt.sign({ _id: user._id }, process.env.jwt_secret);
+    user.jwt = jwtNew;
+    await user.save();
+    return jwtNew;
+});
+
+usuarioSchema.pre("save", async function() {
+    const usuario = this;
+    if (usuario.isModified("Clave")) {
+        usuario.Clave = await bcrypt.hash(usuario.Clave, 8);
+    }
+    // Junior => JUNIOR
+    if (usuario.isModified("Nombres")) {
+        usuario.Nombres = usuario.Nombres.toUpperCase();
+    }
+
 });
 const UsuarioModel = mongoose.model(
     'usuario', usuarioSchema

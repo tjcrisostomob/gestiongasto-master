@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const UsuarioModel = require('../dominio/usuario.model');
+const bcrypt = require("bcryptjs")
 async function create(usuario) {
     const session = await mongoose.startSession();
     try {
         session.startTransaction();
         const UsuarioNew = new UsuarioModel(usuario);
         await UsuarioNew.save({ session });
+        //var jwt = UsuarioNew.generarAuthToken(); 
         await session.commitTransaction();
         return Promise.resolve(UsuarioNew);
 
@@ -56,5 +58,27 @@ async function update(usuario) {
         await session.endSession();
     }
 }
-const UsuarioMongo = { create, search, eliminate, update };
+async function login(dni, clave) {
+    try {
+        const UsuarioSearch = await UsuarioModel.findOne({ Dni: dni });
+
+        if (!UsuarioSearch) {
+            throw new Error("Usuario no encontrado");
+        }
+        console.log(UsuarioSearch);
+        console.log(clave);
+        const esClaveCorrecta = await bcrypt.compare(clave, UsuarioSearch.Clave);
+        if (!esClaveCorrecta) {
+            throw new Error("Clave incorrecta");
+        }
+        const jwt = await UsuarioSearch.generarAuthToken();
+        console.log(jwt)
+
+        return Promise.resolve(UsuarioSearch);
+
+    } catch (error) {
+        return Promise.reject(error);
+    } finally {}
+}
+const UsuarioMongo = { create, search, eliminate, update, login };
 module.exports = UsuarioMongo;
